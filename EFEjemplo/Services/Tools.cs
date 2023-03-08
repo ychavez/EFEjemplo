@@ -4,7 +4,7 @@
     {
         public void Conectar()
         {
-            Console.WriteLine("Hola");
+            Console.WriteLine(DateTime.Now);
         }
 
         public int TraerAlgo()

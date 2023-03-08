@@ -41,18 +41,18 @@ namespace EFEjemplo.Pages
             //    int productId = int.Parse( row[0].ToString())
             //}
 
-            var producto = new Product();
+            //var producto = new Product();
 
-            producto.Nombre = "CPU";
-            producto.Categoria = "Computo";
-            producto.Precio = 300;
-            producContext.Products.Add(producto);
+            //producto.Nombre = "CPU";
+            //producto.Categoria = "Computo";
+            //producto.Precio = 300;
+            //producContext.Products.Add(producto);
 
-            producContext.Products.Add(new Product { Nombre = "Teclado", Categoria = "Computo", Precio = 100m });
-            producContext.Products.Add(new Product { Nombre = "Mouse", Categoria = "Computo", Precio = 150m });
-            producContext.Products.Add(new Product { Nombre = "Monitor", Categoria = "Computo", Precio = 200m });
+            //producContext.Products.Add(new Product { Nombre = "Teclado", Categoria = "Computo", Precio = 100m });
+            //producContext.Products.Add(new Product { Nombre = "Mouse", Categoria = "Computo", Precio = 150m });
+            //producContext.Products.Add(new Product { Nombre = "Monitor", Categoria = "Computo", Precio = 200m });
 
-            producContext.SaveChanges();
+            //producContext.SaveChanges();
 
             /// select * from
 
@@ -65,7 +65,8 @@ namespace EFEjemplo.Pages
 
             var algo = _tools.TraerAlgo();
 
-            /*
+            /*    add-migration {nombre de la migracion}
+             *    update-database
              * 
              * Practica: 
              * 1.- crear un proyecto web de razor pages
