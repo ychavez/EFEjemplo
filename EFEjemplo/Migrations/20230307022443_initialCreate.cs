@@ -34,3 +34,5 @@ namespace EFEjemplo.Migrations
         }
     }
 }
+
+// add-migration categorias

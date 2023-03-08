@@ -12,7 +12,9 @@ namespace EFEjemplo
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+
             builder.Services.AddScoped<ITools, Tools>();
+
             builder.Services.AddDbContext<ProducContext>
                 (option => option.UseSqlServer(builder.Configuration.GetConnectionString("ProductConnection")));
 
