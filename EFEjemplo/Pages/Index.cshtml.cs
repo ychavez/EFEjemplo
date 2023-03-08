@@ -41,39 +41,22 @@ namespace EFEjemplo.Pages
             //    int productId = int.Parse( row[0].ToString())
             //}
 
-            //var producto = new Product();
+            var producto = new Product();
 
-            //producto.Nombre = "CPU";
-            //producto.Categoria = "Computo";
-            //producto.Precio = 300;
+            producto.Nombre = "CPU";
+            producto.Categoria = "Computo";
+            producto.Precio = 300;
+            producContext.Products.Add(producto);
 
-            //producContext.Products.Add(new Product { Nombre = "Teclado", Categoria = "Computo", Precio = 100m });
-            //producContext.Products.Add(new Product { Nombre = "Mouse", Categoria = "Computo", Precio = 150m });
-            //producContext.Products.Add(new Product { Nombre = "Monitor", Categoria = "Computo", Precio = 200m });
-            //producContext.Products.Add(producto);
+            producContext.Products.Add(new Product { Nombre = "Teclado", Categoria = "Computo", Precio = 100m });
+            producContext.Products.Add(new Product { Nombre = "Mouse", Categoria = "Computo", Precio = 150m });
+            producContext.Products.Add(new Product { Nombre = "Monitor", Categoria = "Computo", Precio = 200m });
 
-            //producContext.SaveChanges();
+            producContext.SaveChanges();
 
             /// select * from
 
-            var productos = producContext.Products.ToList();
-
-            var mouse = producContext.Products.Where(x => x.Nombre == "Mouse");
-            var mouse2 = producContext.Products.Find(3);
-
-            var mouse3 = producContext.Products.Skip(2).Take(1).First();
-
-            var mouse4 = productos[3];
-
-            //foreach (var item in productos)
-            //{
-
-            //}
-
-            //for (int i = 0; i < productos.Count(); i++)
-            //{
-            //    var producto = productos[i];
-            //}
+            var products = producContext.Products.ToList(); // select * from  products;
 
 
 
@@ -81,6 +64,20 @@ namespace EFEjemplo.Pages
             //var algo = tools.TraerAlgo();
 
             var algo = _tools.TraerAlgo();
+
+            /*
+             * 
+             * Practica: 
+             * 1.- crear un proyecto web de razor pages
+             * 2.- crear un servicio (inyeccion de dependencias) que tenga un metodo que nos sirva para
+             *   imprimir la fecha actual en la consola
+             * 3.- configurar la inyeccion de dependencias para este servicio
+             * 4.- agregar ese servicio al inde y probar su funcionalidad
+             * 
+             * 5.- crearemos un modelo que se llamara Actor y tendra las propiedades (Id,nombre, apellido)
+             * 6.- agregar Entityframework y realizar inserciones y una lectura en el index
+             *    tomar en cuenta la cofiguracion de entityframework y las migraciones)
+             */
             
         }
 
