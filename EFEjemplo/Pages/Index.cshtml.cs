@@ -3,6 +3,7 @@ using EFEjemplo.Models;
 using EFEjemplo.Services;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using System.Data;
 
 namespace EFEjemplo.Pages
@@ -23,62 +24,55 @@ namespace EFEjemplo.Pages
         public void OnGet()
         {
 
-            //var dt = new DataTable();
+            // insert = add, addRange
 
-            //using (var conn = new SqlConnection("asdf/asdf/asdf/sdf/asdf/"))
-            //using (var cmd = new SqlCommand("select * from products", conn)) 
-            //{
-            //    using (var da = new SqlDataAdapter(cmd)) 
-            //    {
+            // lectura toda la tabla
 
-            //        da.Fill(dt);
-            //    }
+            var categorias = producContext.Category.ToList();
 
-            //}
-
-            //foreach (DataRow row in dt.Rows)
-            //{
-            //    int productId = int.Parse( row[0].ToString())
-            //}
-
-            //var producto = new Product();
-
-            //producto.Nombre = "CPU";
-            //producto.Categoria = "Computo";
-            //producto.Precio = 300;
-            //producContext.Products.Add(producto);
-
-            //producContext.Products.Add(new Product { Nombre = "Teclado", Categoria = "Computo", Precio = 100m });
-            //producContext.Products.Add(new Product { Nombre = "Mouse", Categoria = "Computo", Precio = 150m });
-            //producContext.Products.Add(new Product { Nombre = "Monitor", Categoria = "Computo", Precio = 200m });
-
-            //producContext.SaveChanges();
-
-            /// select * from
-
-            var products = producContext.Products.ToList(); // select * from  products;
+            var muebles = categorias.Where(x => x.Categoria == "Muebles").ToList();
 
 
+            // where en la consulta
+            var mueblesCategoria = producContext.Category
+                .OrderBy(x=> x.Categoria) // order by
+                .Where(x => ( x.Categoria == "Muebles" && x.Categoria == "Comida")  ||  x.Id == 1 ) // where 
+                .Take(2).ToList(); // Take se traduce como top x
 
-            //Tools tools = new();
-            //var algo = tools.TraerAlgo();
 
-            var algo = _tools.TraerAlgo();
+           
 
-            /*    add-migration {nombre de la migracion}
-             *    update-database
-             * 
-             * Practica: 
-             * 1.- crear un proyecto web de razor pages
-             * 2.- crear un servicio (inyeccion de dependencias) que tenga un metodo que nos sirva para
-             *   imprimir la fecha actual en la consola
-             * 3.- configurar la inyeccion de dependencias para este servicio
-             * 4.- agregar ese servicio al inde y probar su funcionalidad
-             * 
-             * 5.- crearemos un modelo que se llamara Actor y tendra las propiedades (Id,nombre, apellido)
-             * 6.- agregar Entityframework y realizar inserciones y una lectura en el index
-             *    tomar en cuenta la cofiguracion de entityframework y las migraciones)
-             */
+            var mueble = producContext.Category.Find(1); // find busca el elemento por Id
+
+            var muebleFirst = producContext.Category.First(x => x.Categoria == "Muebles"); // select top 1
+
+          //  var proc = producContext.Database.ExecuteSqlRaw("insert into Category values ('Mi otra categoria')"); // ejecutar codigo de sql
+
+            var tablaFromProc = producContext.Category.FromSqlRaw("select * from category").ToList(); // ejecuta codigo de sql pero nos trae un resultado
+
+
+            var productos = producContext.Products.Include(x=> x.Categoria).ToList(); // select con Join
+
+            /// consultas dinamicas
+            /// 
+            IQueryable<Product> dinanmycProducts = producContext.Products.AsQueryable();
+            
+            dinanmycProducts = dinanmycProducts.Include(x => x.Categoria);
+
+            dinanmycProducts = dinanmycProducts.Where(x => x.Nombre == "Muebles");
+
+            dinanmycProducts = dinanmycProducts.OrderBy(x => x.Nombre);
+
+            dinanmycProducts = dinanmycProducts.Take(2);
+
+            var resultDinamycProducts = dinanmycProducts.ToList();
+
+
+
+
+
+
+
             
         }
 
